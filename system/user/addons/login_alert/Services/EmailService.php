@@ -5,9 +5,12 @@ namespace Mithra\LoginAlert\Services;
 use Mithra\LoginAlert\Exceptions\Services\EmailServiceException;
 use Mithra\LoginAlert\Exceptions\Services\TemplateServiceException;
 use Mithra\LoginAlert\Email\Parser;
+use Mithra\LoginAlert\Traits\LoggerTrait;
 
 class EmailService
 {
+    use LoggerTrait;
+
     /**
      * @var int
      */
@@ -79,7 +82,7 @@ class EmailService
     protected ?string $from_reply_to_name = null;
 
     /**
-     * @var TemplateService
+     * @var TemplateService|null
      */
     protected ?TemplateService $tpl = null;
 

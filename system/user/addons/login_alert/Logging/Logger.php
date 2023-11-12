@@ -140,10 +140,10 @@ class Logger implements LoggerInterface
      */
     public function log($level, string $message, array $context = []): void
     {
-        if (ee('oc_email:LoggerService')->shouldLog($level)) {
-            $logger = ee('oc_email:LoggerService')->getLogger();
+        if (ee('login_alert:LoggerService')->shouldLog($level)) {
+            $logger = ee('login_alert:LoggerService')->getLogger();
 
-            $message = ee('oc_email:LoggerService')->format($level, $message, $context);
+            $message = ee('login_alert:LoggerService')->format($level, $message, $context);
             $logger->log($message . ' : ' . $this->getCalledClass());
             //throw new InvalidArgumentException();
         }
