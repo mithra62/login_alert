@@ -1,0 +1,151 @@
+<?php
+
+namespace Mithra\LoginAlert\Logging;
+
+class Logger implements LoggerInterface
+{
+    /**
+     * @var string
+     */
+    protected string $called_class = '';
+
+    /**
+     * @param string $class
+     * @return $this
+     */
+    public function setCalledClass(string $class): Logger
+    {
+        $this->called_class = $class;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalledClass(): string
+    {
+        return $this->called_class;
+    }
+
+    /**
+     * System is unusable.
+     * @param string|\Stringable $message
+     * @param array $context
+     * @return void
+     */
+    public function emergency(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::EMERGENCY, $message, $context);
+    }
+
+    /**
+     * Action must be taken immediately.
+     * @param string|\Stringable $message
+     * @param array $context
+     * @return void
+     */
+    public function alert(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::ALERT, $message, $context);
+    }
+
+    /**
+     * Critical conditions.
+     * @param string|\Stringable $message
+     * @param array $context
+     * @return void
+     */
+    public function critical(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::CRITICAL, $message, $context);
+    }
+
+    /**
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     *
+     * @return void
+     */
+    public function error(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::ERROR, $message, $context);
+    }
+
+    /**
+     * Exceptional occurrences that are not errors.
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     *
+     * @return void
+     */
+    public function warning(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::WARNING, $message, $context);
+    }
+
+    /**
+     * Normal but significant events.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     *
+     * @return void
+     */
+    public function notice(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::NOTICE, $message, $context);
+    }
+
+    /**
+     * Interesting events.
+     *
+     * Example: User logs in, SQL logs.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     *
+     * @return void
+     */
+    public function info(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::INFO, $message, $context);
+    }
+
+    /**
+     * Detailed debug information.
+     *
+     * @param string|\Stringable $message
+     * @param array $context
+     *
+     * @return void
+     */
+    public function debug(string $message, array $context = []): void
+    {
+        $this->log(LogLevel::DEBUG, $message, $context);
+    }
+
+    /**
+     * Logs with an arbitrary level.
+     * @param $level
+     * @param string|\Stringable $message
+     * @param array $context
+     * @return void
+     */
+    public function log($level, string $message, array $context = []): void
+    {
+        if (ee('oc_email:LoggerService')->shouldLog($level)) {
+            $logger = ee('oc_email:LoggerService')->getLogger();
+
+            $message = ee('oc_email:LoggerService')->format($level, $message, $context);
+            $logger->log($message . ' : ' . $this->getCalledClass());
+            //throw new InvalidArgumentException();
+        }
+    }
+}
