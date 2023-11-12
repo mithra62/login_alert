@@ -1,8 +1,8 @@
 <?php
 
-namespace Mithra\LoginAlert\Exceptions\Services;
+namespace Mithra62\LoginAlert\Exceptions\Services;
 
-use Mithra\LoginAlert\Exceptions\EmailException;
+use Mithra62\LoginAlert\Exceptions\EmailException;
 
 class EmailServiceException extends EmailException
 {

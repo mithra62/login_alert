@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\Email;
+namespace Mithra62\LoginAlert\Email;
 
 class Parser
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\Exceptions;
+namespace Mithra62\LoginAlert\Exceptions;
 
 use Exception;
 

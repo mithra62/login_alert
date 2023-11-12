@@ -1,8 +1,8 @@
 <?php
 
-namespace Mithra\LoginAlert\Services;
+namespace Mithra62\LoginAlert\Services;
 
-use Mithra\LoginAlert\Exceptions\Services\TemplateServiceException;
+use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
 use CI_DB_mysqli_result;
 
 class TemplateService

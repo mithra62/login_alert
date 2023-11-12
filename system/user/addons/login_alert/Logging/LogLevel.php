@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\Logging;
+namespace Mithra62\LoginAlert\Logging;
 
 class LogLevel
 {

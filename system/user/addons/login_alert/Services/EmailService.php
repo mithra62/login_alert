@@ -1,11 +1,11 @@
 <?php
 
-namespace Mithra\LoginAlert\Services;
+namespace Mithra62\LoginAlert\Services;
 
-use Mithra\LoginAlert\Exceptions\Services\EmailServiceException;
-use Mithra\LoginAlert\Exceptions\Services\TemplateServiceException;
-use Mithra\LoginAlert\Email\Parser;
-use Mithra\LoginAlert\Traits\LoggerTrait;
+use Mithra62\LoginAlert\Exceptions\Services\EmailServiceException;
+use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
+use Mithra62\LoginAlert\Email\Parser;
+use Mithra62\LoginAlert\Traits\LoggerTrait;
 
 class EmailService
 {

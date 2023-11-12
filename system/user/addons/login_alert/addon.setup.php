@@ -1,16 +1,18 @@
 <?php
 
-use Mithra\LoginAlert\Services\LoggerService;
-use Mithra\LoginAlert\Services\TemplateService;
-use Mithra\LoginAlert\Services\EmailService;
+use Mithra62\LoginAlert\Services\LoggerService;
+use Mithra62\LoginAlert\Services\TemplateService;
+use Mithra62\LoginAlert\Services\EmailService;
+
+const LOGIN_ALERT_VERSION = '1.0.0';
 
 return [
-    'name'              => 'login_alert',
-    'description'       => 'login_alert description',
-    'version'           => '1.0.0',
+    'name'              => 'Login Alert',
+    'description'       => 'Will send email upon login based on configuration',
+    'version'           => LOGIN_ALERT_VERSION,
     'author'            => 'mithra62',
-    'author_url'        => 'fdsa',
-    'namespace'         => 'Mithra\LoginAlert',
+    'author_url'        => '',
+    'namespace'         => 'Mithra62\LoginAlert',
     'settings_exist'    => true,
     'services' => [
         'LoggerService' => function ($addon) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\ControlPanel\Routes;
+namespace Mithra62\LoginAlert\ControlPanel\Routes;
 
 use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
 

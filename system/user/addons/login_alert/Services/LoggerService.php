@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\Services;
+namespace Mithra62\LoginAlert\Services;
 
 use ExpressionEngine\Service\Logger\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mithra\LoginAlert\Extensions;
+namespace Mithra62\LoginAlert\Extensions;
 
 use ExpressionEngine\Service\Addon\Controllers\Extension\AbstractRoute;
 
