@@ -11,9 +11,10 @@ class EmailServiceTest extends TestCase
         $this->assertTrue(class_exists('Mithra62\LoginAlert\Services\EmailService'));
     }
 
-    public function testTraitIsAttachedToService()
+    public function testTraitIsAttachedToService(): EmailService
     {
         $service = new EmailService(1, [], ee('login_alert:TemplateService'));
-        $this->assertTrue(class_exists('Mithra62\LoginAlert\Services\EmailService', 'process'));;
+        $this->assertTrue(method_exists($service, 'logger'));
+        return $service;
     }
 }

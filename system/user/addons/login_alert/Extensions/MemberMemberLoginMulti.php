@@ -2,11 +2,7 @@
 
 namespace Mithra62\LoginAlert\Extensions;
 
-use ExpressionEngine\Service\Addon\Controllers\Extension\AbstractRoute;
-
-class MemberMemberLoginMulti extends AbstractRoute
+class MemberMemberLoginMulti extends MemberMemberLoginSingle
 {
-    public function process($hook_data)
-    {
-    }
+
 }
