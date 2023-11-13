@@ -2,9 +2,9 @@
 
 namespace Mithra62\LoginAlert\Exceptions\Services;
 
-use Mithra62\LoginAlert\Exceptions\EmailException;
+use Exception;
 
-class TemplateServiceException extends EmailException
+class TemplateServiceException extends Exception
 {
 
 }

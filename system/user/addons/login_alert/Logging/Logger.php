@@ -29,7 +29,7 @@ class Logger implements LoggerInterface
 
     /**
      * System is unusable.
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
@@ -40,7 +40,7 @@ class Logger implements LoggerInterface
 
     /**
      * Action must be taken immediately.
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
@@ -51,7 +51,7 @@ class Logger implements LoggerInterface
 
     /**
      * Critical conditions.
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */
@@ -64,7 +64,7 @@ class Logger implements LoggerInterface
      * Runtime errors that do not require immediate action but should typically
      * be logged and monitored.
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      *
      * @return void
@@ -80,7 +80,7 @@ class Logger implements LoggerInterface
      * Example: Use of deprecated APIs, poor use of an API, undesirable things
      * that are not necessarily wrong.
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      *
      * @return void
@@ -93,7 +93,7 @@ class Logger implements LoggerInterface
     /**
      * Normal but significant events.
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      *
      * @return void
@@ -108,7 +108,7 @@ class Logger implements LoggerInterface
      *
      * Example: User logs in, SQL logs.
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      *
      * @return void
@@ -121,7 +121,7 @@ class Logger implements LoggerInterface
     /**
      * Detailed debug information.
      *
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      *
      * @return void
@@ -134,7 +134,7 @@ class Logger implements LoggerInterface
     /**
      * Logs with an arbitrary level.
      * @param $level
-     * @param string|\Stringable $message
+     * @param string $message
      * @param array $context
      * @return void
      */

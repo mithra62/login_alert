@@ -4,7 +4,6 @@ namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Exceptions\Services\EmailServiceException;
 use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
-use Mithra62\LoginAlert\Email\Parser;
 use Mithra62\LoginAlert\Traits\LoggerTrait;
 
 class EmailService
@@ -424,96 +423,6 @@ class EmailService
             return false;
         }
     }
-
-    /**
-     * @param array $email
-     * @return bool
-     */
-    public function dispatch(array $email): bool
-    {
-        $mg = Mailgun::create($this->getSetting('private_key'));
-        $builder = new MessageBuilder();
-
-        $recipients = $email['recipients'] ?? [];
-        $cc = $email['cc_array'] ?? [];
-        $bcc = $email['bcc_array'] ?? [];
-
-        foreach ($recipients as $recipient) {
-            $builder->addToRecipient($recipient);
-        }
-
-        foreach ($cc as $recipient) {
-            $builder->addCcRecipient($recipient);
-        }
-
-        foreach ($bcc as $recipient) {
-            $builder->addBccRecipient($recipient);
-        }
-
-        $subject = $email['subject'];
-        if (! $subject) {
-            $subject = $email['headers']['Subject'];
-        }
-
-        $content = Parser::parse($email);
-        $builder->setFromAddress($this->getFromEmail());
-        $builder->setSubject($subject);
-
-        if ($content['html'] && $this->isHtml()) {
-            $builder->setHtmlBody($content['html']);
-        }
-
-        if ($content['text']) {
-            $builder->setTextBody($content['text']);
-        }
-
-        $builder->setTestMode($this->getSetting('test_mode', false));
-
-        // disable link tracking with password reset links
-        if ($this->endsWith($subject, 'Password Reset Request')) {
-            $track_open = false;
-            $track_click = false;
-        } else {
-            $track_open = true;
-            $track_click = true;
-        }
-
-        $builder->setOpenTracking($track_open);
-        $builder->setClickTracking($track_click);
-
-        switch ($this->getSiteId()) {
-            case 1:
-                $mg_domain = $this->getSetting('bb_domain');
-                break;
-            case 2:
-                $mg_domain = $this->getSetting('cnc_domain');
-                break;
-            default:
-                $mg_domain = $this->getSetting('bb_domain'); // fallback
-                mail('admin@oc03.com', 'BB Error',
-                    'Method:'.__METHOD__."\n\nLine: ".__LINE__."\n\n".print_r($this, true));
-                break;
-        }
-
-        $this->logger()->debug('Sending domain set to '.$mg_domain);
-        $sent = $mg->messages()->send($mg_domain, $builder->getMessage());
-        if ($sent instanceof SendResponse) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return bool
-     * @param string $haystack
-     * @param string $needle
-     */
-    private function endsWith($haystack, $needle) {
-        $length = strlen($needle);
-        return $length > 0 ? substr($haystack, -$length) === $needle : true;
-    }
-
 
     /**
      * @return array
