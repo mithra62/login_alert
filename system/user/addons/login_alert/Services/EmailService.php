@@ -90,7 +90,7 @@ class EmailService
      * @param array $config
      * @param TemplateService|null $tpl
      */
-    public function __construct(int $site_id, array $config = [], TemplateService $tpl = null)
+    public function __construct(int $site_id, array $config, TemplateService $tpl)
     {
         $this->site_id = $site_id;
         $this->config = $config;
