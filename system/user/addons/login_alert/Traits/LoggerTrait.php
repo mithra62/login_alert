@@ -1,8 +1,8 @@
 <?php
 
-namespace Mithra\LoginAlert\Traits;
+namespace Mithra62\LoginAlert\Traits;
 
-use Mithra\LoginAlert\Logging\Logger;
+use Mithra62\LoginAlert\Logging\Logger;
 
 trait LoggerTrait
 {

@@ -79,4 +79,81 @@ class AddonSetupTest extends TestCase
         $this->assertTrue($addon->get('version') == LOGIN_ALERT_VERSION);
         return $addon;
     }
+
+    /**
+     * @depends testVersionValue
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testServiceArrayCount(Provider $addon): Provider
+    {
+        $this->assertCount(2, $addon->get('services'));
+        return $addon;
+    }
+
+    /**
+     * @depends testServiceArrayCount
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testServiceHasLoggerKey(Provider $addon): Provider
+    {
+        $this->assertArrayHasKey('LoggerService', $addon->get('services'));
+        return $addon;
+    }
+
+    /**
+     * @depends testServiceHasLoggerKey
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testLoggerServiceInstance(Provider $addon): Provider
+    {
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\LoggerService', ee('login_alert:LoggerService'));
+        return $addon;
+    }
+
+    /**
+     * @depends testLoggerServiceInstance
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testServiceHasTemplateKey(Provider $addon): Provider
+    {
+        $this->assertArrayHasKey('TemplateService', $addon->get('services'));
+        return $addon;
+    }
+
+    /**
+     * @depends testServiceHasTemplateKey
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testTemplateServiceInstance(Provider $addon): Provider
+    {
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\TemplateService', ee('login_alert:TemplateService'));
+        return $addon;
+    }
+
+    /**
+     * @depends testTemplateServiceInstance
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testSingletonServiceArrayCount(Provider $addon): Provider
+    {
+        $this->assertCount(1, $addon->get('services.singletons'));
+        return $addon;
+    }
+
+    /**
+     * @depends testSingletonServiceArrayCount
+     * @param Provider $addon
+     * @return Provider
+     */
+    public function testSingletonServiceHasEmailKey(Provider $addon): Provider
+    {
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\EmailService', ee('login_alert:EmailService'));
+        return $addon;
+    }
 }

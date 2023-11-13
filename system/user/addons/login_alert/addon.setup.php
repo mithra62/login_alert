@@ -4,7 +4,9 @@ use Mithra62\LoginAlert\Services\LoggerService;
 use Mithra62\LoginAlert\Services\TemplateService;
 use Mithra62\LoginAlert\Services\EmailService;
 
-const LOGIN_ALERT_VERSION = '1.0.0';
+if (!defined('LOGIN_ALERT_VERSION')) {
+    define('LOGIN_ALERT_VERSION', '1.0.0');
+}
 
 return [
     'name'              => 'Login Alert',
