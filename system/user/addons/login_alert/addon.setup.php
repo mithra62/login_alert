@@ -16,6 +16,9 @@ return [
     'author_url'        => '',
     'namespace'         => 'Mithra62\LoginAlert',
     'settings_exist'    => true,
+    'models' => [
+        'Settings' => 'Model\MemberLoginAlerts',
+    ],
     'services' => [
         'LoggerService' => function ($addon) {
             return new LoggerService(ee()->config->item('site_id'));
