@@ -4,9 +4,12 @@ namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
 use CI_DB_mysqli_result;
+use Mithra62\LoginAlert\Traits\LoggerTrait;
 
 class TemplateService
 {
+    use LoggerTrait;
+
     /**
      * @var int
      */
@@ -34,6 +37,11 @@ class TemplateService
     public function getSiteId(): int
     {
         return $this->site_id;
+    }
+
+    public function getOptions()
+    {
+
     }
 
     /**
