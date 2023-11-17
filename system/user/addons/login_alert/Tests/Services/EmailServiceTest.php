@@ -4,6 +4,14 @@ namespace Mithra62\LoginAlert\Tests\Services;
 use PHPUnit\Framework\TestCase;
 use Mithra62\LoginAlert\Services\EmailService;
 
+class _email_service_test_sub extends EmailService
+{
+    public function _test_validate()
+    {
+        return $this->validate();
+    }
+}
+
 class EmailServiceTest extends TestCase
 {
     /**
@@ -16,6 +24,39 @@ class EmailServiceTest extends TestCase
 
     /**
      * @depends testClassExists
+     * @return void
+     */
+    public function testValidateThrowsExceptionOnBadDefaults()
+    {
+        $class = new _email_service_test_sub();
+        $this->expectException('Mithra62\LoginAlert\Exceptions\Services\EmailServiceException');
+        $class->_test_validate();
+    }
+
+    /**
+     * @depends testValidateThrowsExceptionOnBadDefaults
+     * @return void
+     */
+    public function testValidateDoesntThrowOnGoodConfig()
+    {
+        $this->expectNotToPerformAssertions();
+        $config = [
+            'to' => 'test@test.com',
+            'reply_to_email' => 'test@test.com',
+            'reply_to_name' => 'Reply To Name',
+            'subject' => 'My Email Subject',
+            'from_name' => 'From Name',
+            'from_email' => 'from@email.com',
+            'template' => 'my/template',
+            'template_vars' => []
+        ];
+
+        $class = new _email_service_test_sub(null, $config);
+        $class->_test_validate();
+    }
+
+    /**
+     * @depends testValidateDoesntThrowOnGoodConfig
      * @return EmailService
      */
     public function testLogTraitIsAttachedToService(): EmailService
@@ -678,19 +719,6 @@ class EmailServiceTest extends TestCase
     }
 
     /**
-     * @depends testFromReplyToNameHasProperValue
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function tfdsaestReplyToNameDefaultsToFromName(EmailService $service): EmailService
-    {
-        $service->setReplyToName(null);
-        $service->setFromName('override@fromname.com');
-        $this->assertEquals('override@fromname.com', $service->getReplyToName());
-        return $service;
-    }
-
-    /**
      * @depends testAsTextValueTruthiness
      * @param EmailService $service
      * @return EmailService
@@ -765,6 +793,51 @@ class EmailServiceTest extends TestCase
         $this->assertEquals($config['bcc'], $service->getBcc());
         $this->assertEquals($config['cc'], $service->getCc());
 
+        return $service;
+    }
+
+    /**
+     * @depends testInstantiationConfigDefaults
+     * @param EmailService $service
+     * @return EmailService
+     */
+    public function testTplPropertyExists(EmailService $service): EmailService
+    {
+        $this->assertObjectHasAttribute('tpl', $service);
+        return $service;
+    }
+
+    /**
+     * @depends testTplPropertyExists
+     * @param EmailService $service
+     * @return EmailService
+     */
+    public function testTplDefaultValue(EmailService $service): EmailService
+    {
+        $this->assertNull($service->getTpl());
+        return $service;
+    }
+
+    /**
+     * @depends testTplDefaultValue
+     * @param EmailService $service
+     * @return EmailService
+     */
+    public function testSetTplReturnInstance(EmailService $service): EmailService
+    {
+        $tpl = $this->createMock('Mithra62\LoginAlert\Services\TemplateService');
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\EmailService', $service->setTpl($tpl));
+        return $service;
+    }
+
+    /**
+     * @depends testSetTplReturnInstance
+     * @param EmailService $service
+     * @return EmailService
+     */
+    public function testGetTplHasProperValue(EmailService $service): EmailService
+    {
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\TemplateService', $service->getTpl());
         return $service;
     }
 }

@@ -157,7 +157,7 @@ class EmailService
      */
     public function addCc(string $email): EmailService
     {
-        $this->logger()->debug('CC Email address set to ' . $email);
+        $this->logger()->debug('CC Email address added ' . $email);
         $this->cc[] = $email;
         return $this;
     }
@@ -235,6 +235,10 @@ class EmailService
      */
     public function getTemplate(): ?string
     {
+        if (is_null($this->template)) {
+            $this->template = $this->getSetting('template');
+        }
+
         return $this->template;
     }
 
@@ -243,6 +247,10 @@ class EmailService
      */
     public function getTemplateVars(): array
     {
+        if (is_null($this->template_vars)) {
+            $this->template_vars = $this->getSetting('template_vars');
+        }
+
         return $this->template_vars;
     }
 
@@ -271,6 +279,10 @@ class EmailService
      */
     public function getSubject(): ?string
     {
+        if (is_null($this->subject)) {
+            $this->subject = $this->getSetting('subject');
+        }
+
         return $this->subject;
     }
 
@@ -429,6 +441,10 @@ class EmailService
 
         try {
 
+            if(is_null($this->tpl)) {
+                throw new EmailServiceException("Template Service isn't setup for Email Service use!");
+            }
+
             $this->validate();
             ee()->email->initialize($options);
             ee()->email
@@ -510,6 +526,14 @@ class EmailService
     {
         $this->tpl = $tpl;
         return $this;
+    }
+
+    /**
+     * @return TemplateService|null
+     */
+    public function getTpl(): ?TemplateService
+    {
+        return $this->tpl;
     }
 
     /**
