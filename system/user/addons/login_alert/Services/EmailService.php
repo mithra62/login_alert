@@ -86,25 +86,36 @@ class EmailService
     protected ?TemplateService $tpl = null;
 
     /**
-     * @param int $site_id
+     * @param int|null $site_id
      * @param array $config
      * @param TemplateService|null $tpl
      */
-    public function __construct(int $site_id, array $config, TemplateService $tpl)
+    public function __construct(int $site_id = null, array $config = [], TemplateService $tpl = null)
     {
-        $this->site_id = $site_id;
-        $this->config = $config;
-        $this->tpl = $tpl;
-        $this->tpl->setCustomDelim($this->getSetting('custom_delim', '%'));
+        $this->logger()->debug('Initialized');
+        if($site_id) {
+            $this->setSiteId($site_id);
+        }
+
+        if($config) {
+            $this->setConfig($config);
+        }
+
+        if($tpl) {
+            $this->tpl = $tpl;
+            $this->tpl->setCustomDelim($this->getSetting('custom_delim', '%'));
+        }
+
         ee()->load->library('email');
     }
 
     /**
-     * @param int $to
+     * @param int $site_id
      * @return $this
      */
     public function setSiteId(int $site_id): EmailService
     {
+        $this->logger()->debug('Set site_id');
         $this->site_id = $site_id;
         return $this;
     }
@@ -133,6 +144,10 @@ class EmailService
      */
     public function getTo(): ?string
     {
+        if (is_null($this->to)) {
+            $this->to = $this->getSetting('to');
+        }
+
         return $this->to;
     }
 
@@ -142,6 +157,7 @@ class EmailService
      */
     public function addCc(string $email): EmailService
     {
+        $this->logger()->debug('CC Email address set to ' . $email);
         $this->cc[] = $email;
         return $this;
     }
@@ -162,6 +178,10 @@ class EmailService
      */
     public function getCc(): array
     {
+        if (!$this->cc) {
+            $this->cc = $this->getSetting('cc', []);
+        }
+
         return $this->cc;
     }
 
@@ -191,6 +211,10 @@ class EmailService
      */
     public function getBcc(): array
     {
+        if (!$this->bcc) {
+            $this->bcc = $this->getSetting('bcc', []);
+        }
+
         return $this->bcc;
     }
 
@@ -220,6 +244,16 @@ class EmailService
     public function getTemplateVars(): array
     {
         return $this->template_vars;
+    }
+
+    /**
+     * @param array $vars
+     * @return $this
+     */
+    public function setTemplateVars(array $vars = [])
+    {
+        $this->template_vars = $vars;
+        return $this;
     }
 
     /**
@@ -349,10 +383,10 @@ class EmailService
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return $this
      */
-    public function setReplyToName(string $name): EmailService
+    public function setReplyToName(?string $name): EmailService
     {
         $this->from_reply_to_name = $name;
         return $this;
@@ -364,7 +398,7 @@ class EmailService
     public function getReplyToName(): ?string
     {
         if (is_null($this->from_reply_to_name)) {
-            $this->from_reply_to_name = $this->getSetting('reply_to_name');
+            $this->from_reply_to_name = $this->getSetting('reply_to_name') ?? $this->getSetting('from_name');
         }
 
         return $this->from_reply_to_name;
@@ -451,6 +485,34 @@ class EmailService
     }
 
     /**
+     * @return array
+     */
+    public function getConfig(): array
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param array $config
+     * @return $this
+     */
+    public function setConfig(array $config): EmailService
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    /**
+     * @param TemplateService $tpl
+     * @return $this
+     */
+    public function setTpl(TemplateService $tpl): EmailService
+    {
+        $this->tpl = $tpl;
+        return $this;
+    }
+
+    /**
      * @return void
      * @throws EmailServiceException
      */
@@ -469,7 +531,7 @@ class EmailService
 
         $result = ee('Validation')->make($rules)->validate($data);
         if (!$result->isValid()) {
-            throw new EmailServiceException("Validation Failed: ".json_encode($result->getAllErrors()));
+            throw new EmailServiceException("Email Service Validation Failed: ".json_encode($result->getAllErrors()));
         }
     }
 }
