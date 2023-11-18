@@ -124,7 +124,7 @@ class EmailService
     /**
      * @return int
      */
-    public function getSiteId()
+    public function getSiteId(): ?int
     {
         return $this->site_id;
     }

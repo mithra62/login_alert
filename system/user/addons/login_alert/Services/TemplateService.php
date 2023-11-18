@@ -26,6 +26,7 @@ class TemplateService
     public function __construct(int $site_id = null)
     {
         if($site_id) {
+            $this->logger()->debug('Set site_id to: ' . $site_id);
             $this->site_id = $site_id;
         }
 
@@ -37,14 +38,20 @@ class TemplateService
     /**
      * @return int
      */
-    public function getSiteId(): int
+    public function getSiteId(): ?int
     {
         return $this->site_id;
     }
 
-    public function getOptions()
+    /**
+     * @param int $site_id
+     * @return $this
+     */
+    public function setSiteId(int $site_id): TemplateService
     {
-
+        $this->logger()->debug('Set site_id to: ' . $site_id);
+        $this->site_id = $site_id;
+        return $this;
     }
 
     /**
