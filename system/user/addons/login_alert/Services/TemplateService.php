@@ -11,9 +11,9 @@ class TemplateService
     use LoggerTrait;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected int $site_id = 1;
+    protected ?int $site_id = 1;
 
     /**
      * @var string
@@ -21,11 +21,14 @@ class TemplateService
     protected string $custom_delim = '%';
 
     /**
-     * @param int $site_id
+     * @param ?int $site_id
      */
-    public function __construct(int $site_id)
+    public function __construct(int $site_id = null)
     {
-        $this->site_id = $site_id;
+        if($site_id) {
+            $this->site_id = $site_id;
+        }
+
         if (!isset(ee()->TMPL)) {
             ee()->load->library('template', null, 'TMPL');
         }

@@ -11,9 +11,9 @@ class EmailService
     use LoggerTrait;
 
     /**
-     * @var int
+     * @var int|null
      */
-    public int $site_id = 1;
+    public ?int $site_id = 1;
 
     /**
      * @var array
