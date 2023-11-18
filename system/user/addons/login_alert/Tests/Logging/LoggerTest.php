@@ -17,8 +17,7 @@ class LoggerTest extends TestCase
      */
     public function testInstanceofLoggerInterface(): Logger
     {
-        $logger = new Logger;
-        $this->assertInstanceOf('Mithra62\LoginAlert\Logging\LoggerInterface', $logger);
+        $this->assertInstanceOf('Mithra62\LoginAlert\Logging\LoggerInterface', $logger = new Logger);
         return $logger;
     }
 }

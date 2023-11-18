@@ -98,6 +98,7 @@ class EmailService
         }
 
         if($config) {
+            $this->logger()->debug('Config Added', $config);
             $this->setConfig($config);
         }
 

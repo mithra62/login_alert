@@ -34,9 +34,8 @@ class LoggerService
     {
         $return = ' [' . date('r') . '] (' . $level . ') Message: "' . $message . '" ';
         if ($context) {
-            foreach ($context as $key => $value) {
-                $return .= $key . ': "' . $value . '"'."\t";
-            }
+            $return .= json_encode($context);
+
         }
 
         return trim($return);
