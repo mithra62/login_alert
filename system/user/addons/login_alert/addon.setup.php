@@ -3,6 +3,7 @@
 use Mithra62\LoginAlert\Services\LoggerService;
 use Mithra62\LoginAlert\Services\TemplateService;
 use Mithra62\LoginAlert\Services\EmailService;
+use Mithra62\LoginAlert\Services\AlertService;
 
 if (!defined('LOGIN_ALERT_VERSION')) {
     define('LOGIN_ALERT_VERSION', '1.0.0');
@@ -25,6 +26,9 @@ return [
         },
         'TemplateService' => function ($addon) {
             return new TemplateService(ee()->config->item('site_id'));
+        },
+        'AlertService' => function ($addon) {
+            return new AlertService(ee()->config->item('site_id'));
         },
     ],
     'services.singletons' => [

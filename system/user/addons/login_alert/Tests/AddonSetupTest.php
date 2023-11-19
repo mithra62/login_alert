@@ -87,7 +87,7 @@ class AddonSetupTest extends TestCase
      */
     public function testServiceArrayCount(Provider $addon): Provider
     {
-        $this->assertCount(2, $addon->get('services'));
+        $this->assertCount(3, $addon->get('services'));
         return $addon;
     }
 

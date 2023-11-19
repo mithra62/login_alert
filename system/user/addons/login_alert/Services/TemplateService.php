@@ -4,21 +4,18 @@ namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
 use CI_DB_mysqli_result;
-use Mithra62\LoginAlert\Traits\LoggerTrait;
 
-class TemplateService
+class TemplateService extends AbstractService
 {
-    use LoggerTrait;
-
-    /**
-     * @var int|null
-     */
-    protected ?int $site_id = 1;
-
     /**
      * @var string
      */
     protected string $custom_delim = '%';
+
+    /**
+     * @var string
+     */
+    protected string $tpl_path = '';
 
     /**
      * @param ?int $site_id
@@ -33,25 +30,6 @@ class TemplateService
         if (!isset(ee()->TMPL)) {
             ee()->load->library('template', null, 'TMPL');
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getSiteId(): ?int
-    {
-        return $this->site_id;
-    }
-
-    /**
-     * @param int $site_id
-     * @return $this
-     */
-    public function setSiteId(int $site_id): TemplateService
-    {
-        $this->logger()->debug('Set site_id to: ' . $site_id);
-        $this->site_id = $site_id;
-        return $this;
     }
 
     /**
@@ -77,7 +55,7 @@ class TemplateService
         }
 
         ee()->TMPL->parse($template_data['template_data']);
-        return ee()->TMPL->parse_globals(ee()->TMPL->final_template);;
+        return ee()->TMPL->parse_globals(ee()->TMPL->final_template);
     }
 
     /**
@@ -91,7 +69,7 @@ class TemplateService
             $str = str_replace($this->makeCustomVar($key), $value, $str);
         }
 
-        return ee()->TMPL->parse_variables($str, [$vars]);;
+        return ee()->TMPL->parse_variables($str, [$vars]);
     }
 
     /**
@@ -117,7 +95,7 @@ class TemplateService
 
         if ($query instanceof CI_DB_mysqli_result) {
             $template_data = $query->row_array();
-            if (PATH_TMPL && ee()->config->item('save_tmpl_files') === 'y') {
+            if ($this->getTplPath() && ee()->config->item('save_tmpl_files') === 'y') {
                 $template_data['template_data'] = $this->getTemplateFileData($template_group, $template_name, $template_data['template_type']);
             }
 
@@ -145,7 +123,7 @@ class TemplateService
     {
         ee()->load->library('api');
         ee()->legacy_api->instantiate('template_structure');
-        $file = PATH_TMPL . $this->getSiteShortname() . '/'
+        $file = $this->getTplPath() . $this->getSiteShortname() . '/'
             . $template_group . '.group/' . $template_name
             . ee()->api_template_structure->file_extensions($template_type);
 
@@ -202,5 +180,27 @@ class TemplateService
     public function makeCustomVar($var): string
     {
         return $this->getCustomDelim() . $var . $this->getCustomDelim();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTplPath(): string
+    {
+        if(!$this->tpl_path) {
+            $this->tpl_path = PATH_TMPL;
+        }
+
+        return $this->tpl_path;
+    }
+
+    /**
+     * @param string $path
+     * @return $this
+     */
+    public function setTplPath(string $path): TemplateService
+    {
+        $this->tpl_path = $path;
+        return $this;
     }
 }

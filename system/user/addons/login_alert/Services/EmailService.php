@@ -4,17 +4,9 @@ namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Exceptions\Services\EmailServiceException;
 use Mithra62\LoginAlert\Exceptions\Services\TemplateServiceException;
-use Mithra62\LoginAlert\Traits\LoggerTrait;
 
-class EmailService
+class EmailService extends AbstractService
 {
-    use LoggerTrait;
-
-    /**
-     * @var int|null
-     */
-    public ?int $site_id = 1;
-
     /**
      * @var array
      */
@@ -108,25 +100,6 @@ class EmailService
         }
 
         ee()->load->library('email');
-    }
-
-    /**
-     * @param int $site_id
-     * @return $this
-     */
-    public function setSiteId(int $site_id): EmailService
-    {
-        $this->logger()->debug('Set site_id');
-        $this->site_id = $site_id;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSiteId(): ?int
-    {
-        return $this->site_id;
     }
 
     /**
