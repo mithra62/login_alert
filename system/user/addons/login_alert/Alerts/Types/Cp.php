@@ -6,10 +6,9 @@ use Mithra62\LoginAlert\Alerts\AbstractAlert;
 class Cp extends AbstractAlert
 {
     /**
-     * @param int $member_id
      * @return bool
      */
-    public function shouldProcess(int $member_id): bool
+    public function shouldProcess(): bool
     {
         return defined('REQ') && strtoupper(REQ) == 'CP';
     }

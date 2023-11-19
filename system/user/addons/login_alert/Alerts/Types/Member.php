@@ -5,8 +5,11 @@ use Mithra62\LoginAlert\Alerts\AbstractAlert;
 
 class Member extends AbstractAlert
 {
-    public function shouldProcess(int $member_id): bool
+    /**
+     * @return bool
+     */
+    public function shouldProcess(): bool
     {
-
+        return false;
     }
 }

@@ -3,10 +3,10 @@
 namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Alerts\AbstractAlert;
-use ExpressionEngine\Library\Data\Collection;
 use Mithra62\LoginAlert\Model\MemberLoginAlerts;
 use Mithra62\LoginAlert\Exceptions\Alerts\AlertException;
 use ExpressionEngine\Library\String\Str;
+use ExpressionEngine\Library\Data\Collection;
 
 class AlertService extends AbstractService
 {

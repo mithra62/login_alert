@@ -33,8 +33,7 @@ return [
     ],
     'services.singletons' => [
         'EmailService' => function ($addon) {
-            $config = ee()->config->config['login_alert'] ?? [];
-            return new EmailService(ee()->config->item('site_id'), $config, ee('login_alert:TemplateService'));
+            return new EmailService(ee()->config->item('site_id'), [], ee('login_alert:TemplateService'));
         }
     ]
 ];

@@ -18,7 +18,7 @@ class MemberLoginAlerts extends Model
     protected string $type;
     protected string $notify_emails;
     protected string $notify_member_ids;
-    //protected string $to;
+
     protected int $created_date;
     protected int $last_updated;
 }
