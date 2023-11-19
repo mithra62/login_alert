@@ -208,6 +208,18 @@ abstract class AbstractAlert extends Entity
     }
 
     /**
+     * @return int
+     */
+    public function getCreatedDate(): int
+    {
+        if(!$this->created_date) {
+            $this->created_date = $this->getModel()->created_date;
+        }
+
+        return $this->created_date;
+    }
+
+    /**
      * @param int $member_id
      * @return $this
      */

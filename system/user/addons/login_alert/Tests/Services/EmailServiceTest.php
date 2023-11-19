@@ -23,7 +23,15 @@ class EmailServiceTest extends TestCase
     }
 
     /**
-     * @depends testClassExists
+     * @return void
+     */
+    public function testSetSiteIdReturnInstance()
+    {
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\AbstractService', $service = new EmailService);
+    }
+
+    /**
+     * @depends testSetSiteIdReturnInstance
      * @return void
      */
     public function testValidateThrowsExceptionOnBadDefaults()
@@ -56,67 +64,11 @@ class EmailServiceTest extends TestCase
     }
 
     /**
-     * @depends testValidateDoesntThrowOnGoodConfig
      * @return EmailService
      */
-    public function testLogTraitIsAttachedToService(): EmailService
+    public function testConfigPropertyExists(): EmailService
     {
         $service = new EmailService();
-        $this->assertTrue(method_exists($service, 'logger'));
-        return $service;
-    }
-
-    /**
-     * @depends testLogTraitIsAttachedToService
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function testSiteIdPropertyExists(EmailService $service): EmailService
-    {
-        $this->assertObjectHasAttribute('site_id', $service);
-        return $service;
-    }
-
-    /**
-     * @depends testSiteIdPropertyExists
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function testSiteIdDefaultValue(EmailService $service): EmailService
-    {
-        $this->assertEquals(1, $service->getSiteId());
-        return $service;
-    }
-
-    /**
-     * @depends testSiteIdDefaultValue
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function testSetSiteIdReturnInstance(EmailService $service): EmailService
-    {
-        $this->assertInstanceOf('Mithra62\LoginAlert\Services\EmailService', $service->setSiteId(12));
-        return $service;
-    }
-
-    /**
-     * @depends testSetSiteIdReturnInstance
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function testGetSiteIdHasProperValue(EmailService $service): EmailService
-    {
-        $this->assertEquals(12, $service->getSiteId());
-        return $service;
-    }
-
-    /**
-     * @depends testGetSiteIdHasProperValue
-     * @param EmailService $service
-     * @return EmailService
-     */
-    public function testConfigPropertyExists(EmailService $service): EmailService
-    {
         $this->assertObjectHasAttribute('config', $service);
         return $service;
     }

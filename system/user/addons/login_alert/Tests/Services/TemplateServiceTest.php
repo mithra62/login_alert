@@ -10,64 +10,20 @@ class TemplateServiceTest extends TestCase
         $this->assertTrue(class_exists('Mithra62\LoginAlert\Services\TemplateService'));
     }
 
-    public function testTraitIsAttachedToService(): TemplateService
+    /**
+     * @return void
+     */
+    public function testAbstractServiceInstanceInstance()
     {
-        $service = new TemplateService(1);
-        $this->assertTrue(method_exists($service, 'logger'));
-        return $service;
+        $this->assertInstanceOf('Mithra62\LoginAlert\Services\AbstractService', new TemplateService);
     }
 
     /**
-     * @depends testTraitIsAttachedToService
-     * @param TemplateService $service
      * @return TemplateService
      */
-    public function testSiteIdPropertyExists(TemplateService $service): TemplateService
+    public function testCustomDelimPropertyExists(): TemplateService
     {
-        $this->assertObjectHasAttribute('site_id', $service);
-        return $service;
-    }
-
-    /**
-     * @depends testSiteIdPropertyExists
-     * @param TemplateService $service
-     * @return TemplateService
-     */
-    public function testSiteIdDefaultValue(TemplateService $service): TemplateService
-    {
-        $this->assertEquals(1, $service->getSiteId());
-        return $service;
-    }
-
-    /**
-     * @depends testSiteIdDefaultValue
-     * @param TemplateService $service
-     * @return TemplateService
-     */
-    public function testSetSiteIdReturnInstance(TemplateService $service): TemplateService
-    {
-        $this->assertInstanceOf('Mithra62\LoginAlert\Services\TemplateService', $service->setSiteId(12));
-        return $service;
-    }
-
-    /**
-     * @depends testSetSiteIdReturnInstance
-     * @param TemplateService $service
-     * @return TemplateService
-     */
-    public function testGetSiteIdHasProperValue(TemplateService $service): TemplateService
-    {
-        $this->assertEquals(12, $service->getSiteId());
-        return $service;
-    }
-
-    /**
-     * @depends testSiteIdPropertyExists
-     * @param TemplateService $service
-     * @return TemplateService
-     */
-    public function testCustomDelimPropertyExists(TemplateService $service): TemplateService
-    {
+        $service = new TemplateService;
         $this->assertObjectHasAttribute('custom_delim', $service);
         return $service;
     }
