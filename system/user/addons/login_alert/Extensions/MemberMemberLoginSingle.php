@@ -18,6 +18,7 @@ class MemberMemberLoginSingle extends AbstractRoute
         $member = new \stdClass();
         $member->member_id = 1;
         foreach($alerts AS $alert) {
+
             if($alert->setMemberId($member->member_id)->shouldProcess()) {
                 $alert->process();
             }

@@ -3,7 +3,7 @@
 namespace Mithra62\LoginAlert\Services;
 
 use Mithra62\LoginAlert\Alerts\AbstractAlert;
-use Mithra62\LoginAlert\Model\MemberLoginAlerts;
+use Mithra62\LoginAlert\Model\MemberLoginAlerts AS Settings;
 use Mithra62\LoginAlert\Exceptions\Alerts\AlertException;
 use ExpressionEngine\Library\String\Str;
 use ExpressionEngine\Library\Data\Collection;
@@ -45,10 +45,10 @@ class AlertService extends AbstractService
     }
 
     /**
-     * @param MemberLoginAlerts $alert
+     * @param Settings $alert
      * @return AbstractAlert
      */
-    protected function buildObj(MemberLoginAlerts $alert): AbstractAlert
+    protected function buildObj(Settings $alert): AbstractAlert
     {
         $class = 'Mithra62\LoginAlert\Alerts\Types\\' . Str::studly($alert->type);
         if (!class_exists($class)) {
