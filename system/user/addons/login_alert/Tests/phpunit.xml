@@ -16,20 +16,12 @@
             <directory suffix="Test.php">./</directory>
         </testsuite>
     </testsuites>
-    <coverage cacheDirectory="coverage"
-              includeUncoveredFiles="true"
-              processUncoveredFiles="true"
-              pathCoverage="false"
-              ignoreDeprecatedCodeUnits="true"
-              disableCodeCoverageIgnore="true">
+    <coverage>
+        <include>
+            <directory suffix=".php">../</directory>
+        </include>
         <report>
-            <clover outputFile="reports/clover.xml"/>
-            <cobertura outputFile="reports/cobertura.xml"/>
-            <crap4j outputFile="reports/crap4j.xml" threshold="50"/>
-            <html outputDirectory="reports/html-coverage" lowUpperBound="50" highLowerBound="90"/>
-            <php outputFile="coverage.php"/>
-            <text outputFile="reports/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>
-            <xml outputDirectory="xml-coverage"/>
+            <html outputDirectory="logs/test-coverage-report/" />
         </report>
     </coverage>
     <logging>
