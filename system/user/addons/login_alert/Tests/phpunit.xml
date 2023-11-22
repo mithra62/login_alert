@@ -20,6 +20,9 @@
         <include>
             <directory suffix=".php">../</directory>
         </include>
+        <exclude>
+            <directory>../Tests</directory>
+        </exclude>
         <report>
             <html outputDirectory="logs/test-coverage-report/" />
         </report>
