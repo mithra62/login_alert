@@ -95,6 +95,10 @@ class Index extends AbstractRoute
                         'href' => $url,
                         'title' => lang('edit'),
                     ],
+                    'remove' => [
+                        'href' => ee('CP/URL')->make($this->url( 'delete/' . $alert->getId())),
+                        'title' => lang('la.remove_alert'),
+                    ],
                 ]],
             ];
         }

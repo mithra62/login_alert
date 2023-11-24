@@ -12,9 +12,9 @@ class MemberLoginAlerts extends Model
     protected int $id;
     protected int $site_id;
     protected string $name;
-    protected string $template;
+    protected string $notify_template;
     protected int $status;
-    protected string $subject;
+    protected string $notify_subject;
     protected string $type;
     protected string $notify_emails;
     protected string $notify_member_ids;

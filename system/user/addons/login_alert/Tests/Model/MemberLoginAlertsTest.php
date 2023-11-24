@@ -59,7 +59,7 @@ class MemberLoginAlertsTest extends TestCase
      */
     public function testTemplatePropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
     {
-        $this->assertObjectHasAttribute('template', $model);
+        $this->assertObjectHasAttribute('notify_template', $model);
         return $model;
     }
 
@@ -81,7 +81,7 @@ class MemberLoginAlertsTest extends TestCase
      */
     public function testSubjectPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
     {
-        $this->assertObjectHasAttribute('subject', $model);
+        $this->assertObjectHasAttribute('notify_subject', $model);
         return $model;
     }
 
