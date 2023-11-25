@@ -7,20 +7,21 @@ use ExpressionEngine\Library\Data\Collection;
 
 class MemberMemberLoginSingle extends AbstractRoute
 {
-    //public function process(\stdClass $member_data)
-    public function process($ignore)
+    /**
+     * @param \stdClass $member_data
+     * @return void
+     */
+    public function process(\stdClass $member_data)
     {
         $alerts = ee('login_alert:AlertService')->getAlerts(false);
         if (!$alerts instanceof Collection || $alerts->count() == 0) {
             return;
         }
 
-        $member = new \stdClass();
-        $member->member_id = 1;
         $req = defined('REQ') ? REQ : '';
         foreach($alerts AS $alert) {
-            if($alert->shouldProcess($req, $member->member_id)) {
-                $alert->process($req, $member->member_id);
+            if($alert->shouldProcess($req, $member_data->member_id)) {
+                $alert->process($req, $member_data->member_id);
             }
         }
     }

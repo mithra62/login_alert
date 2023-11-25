@@ -8,6 +8,8 @@ use Mithra62\LoginAlert\Model\MemberLoginAlert as Settings;
 
 class Index extends AbstractRoute
 {
+    protected $addon_name = 'login_alert';
+
     /**
      * @var string
      */

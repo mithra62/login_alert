@@ -7,7 +7,7 @@ use Mithra62\LoginAlert\Forms\Settings as SettingsForm;
 
 class Create extends AbstractRoute
 {
-    protected $base_url = 'addons/settings/login_alert';
+    protected $addon_name = 'login_alert';
 
     public function process($id = false)
     {
@@ -17,7 +17,7 @@ class Create extends AbstractRoute
         $form = new SettingsForm();
         $alert = ee('Model')
             ->make('login_alert:Settings');
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (ee()->input->server('REQUEST_METHOD') === 'POST') {
             $form->setData($_POST);
             $alert->set($_POST);
             $result = $alert->validate();

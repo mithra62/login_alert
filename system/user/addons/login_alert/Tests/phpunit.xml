@@ -22,6 +22,10 @@
         </include>
         <exclude>
             <directory>../Tests</directory>
+            <directory>../ControlPanel</directory>
+            <directory>../Extensions</directory>
+            <directory>../views</directory>
+            <directory>../database</directory>
         </exclude>
         <report>
             <html outputDirectory="logs/test-coverage-report/" />

@@ -11,13 +11,20 @@ class IndexTest extends TestCase
         $this->assertTrue(class_exists('Mithra62\LoginAlert\ControlPanel\Routes\Index'));
     }
 
-    public function testInstanceOfAbstractTag()
+    public function testInstanceOfAbstractTag(): Index
     {
-        $this->assertInstanceOf('ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute', new Index);
+        $this->assertInstanceOf('ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute', $route = new Index);
+        return $route;
     }
 
-    public function testProcessMethodExists()
+    /**
+     * @depends testInstanceOfAbstractTag
+     * @param Index $route
+     * @return Index
+     */
+    public function testProcessMethodReturnInstance(Index $route): Index
     {
-        $this->assertTrue(class_exists('Mithra62\LoginAlert\ControlPanel\Routes\Index', 'process'));;
+        $this->assertInstanceOf('Mithra62\LoginAlert\ControlPanel\Routes\Index', $route->process());
+        return $route;
     }
 }

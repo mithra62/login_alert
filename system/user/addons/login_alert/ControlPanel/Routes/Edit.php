@@ -7,6 +7,8 @@ use Mithra62\LoginAlert\Forms\Settings as SettingsForm;
 
 class Edit extends AbstractRoute
 {
+    protected $addon_name = 'login_alert';
+
     /**
      * @var string
      */
@@ -32,7 +34,7 @@ class Edit extends AbstractRoute
 
         $form = new SettingsForm;
         $form->setData($alert->toArray());
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (ee()->input->server('REQUEST_METHOD') === 'POST') {
             $alert->set($_POST);
             $result = $alert->validate();
             if ($result->isValid()) {
