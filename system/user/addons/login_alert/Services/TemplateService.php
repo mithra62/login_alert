@@ -42,20 +42,24 @@ class TemplateService extends AbstractService
     public function parseTemplate(string $template, array $vars = [], array $custom_vars = []): string
     {
         $template_data = $this->getTemplate($template);
-        ee()->TMPL->parse_php = $template_data['allow_php'];
-        ee()->TMPL->php_parse_location = $template_data['php_parse_location'];
-        ee()->TMPL->template_type = ee()->functions->template_type = $template_data['template_type'];
+        if($template_data) {
+            ee()->TMPL->parse_php = $template_data['allow_php'];
+            ee()->TMPL->php_parse_location = $template_data['php_parse_location'];
+            ee()->TMPL->template_type = ee()->functions->template_type = $template_data['template_type'];
 
-        foreach ($custom_vars as $key => $value) {
-            $template_data['template_data'] = str_replace($this->makeCustomVar($key), $value, $template_data['template_data']);
+            foreach ($custom_vars as $key => $value) {
+                $template_data['template_data'] = str_replace($this->makeCustomVar($key), $value, $template_data['template_data']);
+            }
+
+            if ($vars) {
+                $template_data['template_data'] = ee()->TMPL->parse_variables($template_data['template_data'], [$vars]);
+            }
+
+            ee()->TMPL->parse($template_data['template_data']);
+            return ee()->TMPL->parse_globals(ee()->TMPL->final_template);
         }
 
-        if ($vars) {
-            $template_data['template_data'] = ee()->TMPL->parse_variables($template_data['template_data'], [$vars]);
-        }
-
-        ee()->TMPL->parse($template_data['template_data']);
-        return ee()->TMPL->parse_globals(ee()->TMPL->final_template);
+        return '';
     }
 
     /**
@@ -93,7 +97,7 @@ class TemplateService extends AbstractService
             ->where('templates.site_id', $this->getSiteId())
             ->get('templates');
 
-        if ($query instanceof CI_DB_mysqli_result) {
+        if ($query instanceof CI_DB_mysqli_result && $query->num_rows() >= 1) {
             $template_data = $query->row_array();
             if ($this->getTplPath() && ee()->config->item('save_tmpl_files') === 'y') {
                 $template_data['template_data'] = $this->getTemplateFileData($template_group, $template_name, $template_data['template_type']);
@@ -109,7 +113,7 @@ class TemplateService extends AbstractService
             return $template_data;
         }
 
-        $this->logger()->debug('Email template not found ' . $template_path);
+        $this->logger()->emergency('Email template not found ' . $template_path);
         return null;
     }
 
@@ -131,7 +135,7 @@ class TemplateService extends AbstractService
             return file_get_contents($file);
         }
 
-        $this->logger()->debug('Email template file not found ' . $template_group . '/' . $template_name);
+        $this->logger()->emergency('Email template file not found ' . $template_group . '/' . $template_name);
         return null;
     }
 

@@ -420,13 +420,18 @@ class EmailService extends AbstractService
             }
 
             $this->validate();
+            $message = $this->tpl->parseTemplate($this->getTemplate(), $this->getTemplateVars(), $this->getCustomVars());
+            if(!$message) {
+                return false;
+            }
+
             ee()->email->initialize($options);
             ee()->email
                 ->from($this->getFromEmail(), $this->getFromName())
                 ->to($this->getTo())
                 ->reply_to($this->getReplyToEmail(), $this->getReplyToName())
                 ->subject($this->tpl->parseStr($this->getSubject(), $this->getTemplateVars(), $this->getCustomVars()))
-                ->message($this->tpl->parseTemplate($this->getTemplate(), $this->getTemplateVars(), $this->getCustomVars()));
+                ->message($message);
 
             if ($this->getCc()) {
                 ee()->email->cc($this->getCc());
