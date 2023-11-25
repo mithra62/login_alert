@@ -26,6 +26,7 @@
             <directory>../Extensions</directory>
             <directory>../views</directory>
             <directory>../database</directory>
+            <file>../upd.login_alert.php</file>
         </exclude>
         <report>
             <html outputDirectory="logs/test-coverage-report/" />
