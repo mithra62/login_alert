@@ -9,55 +9,66 @@ class MemberLoginAlert extends Model
     protected static $_primary_key = 'id';
     protected static $_table_name = 'member_login_alerts';
 
-    protected int $id;
-    protected int $site_id;
-    protected string $name;
-    protected int $status;
-    protected int $created_date;
-    protected int $last_updated;
+    protected static $_validation_rules = [
+        'name' => 'required',
+        'notify_template' => 'required',
+        'notify_subject' => 'required',
+        'status' => 'required',
+        'log_into' => 'required',
+        'log_into_when' => 'required',
+        'log_into_what' => 'required',
+        'notify_emails' => 'required',
+    ];
+
+    protected $id;
+    protected $site_id;
+    protected $name;
+    protected $status;
+    protected $created_date;
+    protected $last_updated;
 
     /**
      * The EE template to use for the notification
      * @var string
      */
-    protected string $notify_template;
+    protected $notify_template;
 
     /**
      * @var string
      */
-    protected string $notify_subject;
+    protected $notify_subject;
 
     /**
      * The emails to send notifications to
      * @var string
      */
-    protected string $notify_emails;
+    protected $notify_emails;
 
     /**
      * The member_ids, seperated by commas, to notify
      * @experimental
      * @var string
      */
-    protected string $notify_member_ids;
+    protected $notify_member_ids;
 
     /**
      * Whether cp, frontend, or both
      * @var string
      */
-    protected string $log_into;
+    protected $log_into;
 
     /**
      * The user session criteria to base notifications against
      * Either member or role
      * @var string
      */
-    protected string $log_into_when;
+    protected $log_into_when;
 
     /**
      * The value component for session  criteria
      * @var string
      */
-    protected string $log_into_what;
+    protected $log_into_what;
 
     /**
      * @param string $req

@@ -23,7 +23,7 @@ class Edit extends AbstractRoute
             ->first();
 
         if (!$alert instanceof Settings) {
-            ee('CP/Alert')->makeBanner('plan-delete')
+            ee('CP/Alert')->makeBanner('shared-form')
                 ->asIssue()
                 ->withTitle(lang('la.alert_not_found'))
                 ->defer();
@@ -33,8 +33,27 @@ class Edit extends AbstractRoute
         $form = new SettingsForm;
         $form->setData($alert->toArray());
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            echo 'fdsa';
-            exit;
+            $alert->set($_POST);
+            $result = $alert->validate();
+            if ($result->isValid()) {
+                $alert->save();
+                ee('CP/Alert')->makeInline('shared-form')
+                    ->asSuccess()
+                    ->withTitle(lang('ct.sub.plan_updated'))
+                    ->defer();
+
+                ee()->functions->redirect($this->url('index'));
+                exit;
+
+            } else {
+                $form->setData($_POST);
+                $vars['errors'] = $result;
+                ee('CP/Alert')->makeInline('shared-form')
+                    ->asIssue()
+                    ->withTitle(lang('la.error.update_alert'))
+                    ->now();
+            }
+
         }
 
         $vars += $form->generate();
