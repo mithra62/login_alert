@@ -4,7 +4,7 @@ namespace Mithra62\LoginAlert\ControlPanel\Routes;
 
 use ExpressionEngine\Library\CP\Table;
 use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
-use Mithra62\LoginAlert\Model\MemberLoginAlerts as Settings;
+use Mithra62\LoginAlert\Model\MemberLoginAlert as Settings;
 
 class Index extends AbstractRoute
 {
@@ -88,7 +88,7 @@ class Index extends AbstractRoute
                     'href' => $url,
                 ],
                 $alert->name,
-                $alert->type,
+                $alert->log_into,
                 "<span class='" . $this->getStatusCss($alert) . "'>" . lang($this->getEnabled($alert)) . '</span>',
                 ['toolbar_items' => [
                     'edit' => [

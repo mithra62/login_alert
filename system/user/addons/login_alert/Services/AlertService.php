@@ -2,11 +2,11 @@
 
 namespace Mithra62\LoginAlert\Services;
 
-use Mithra62\LoginAlert\Alerts\AbstractAlert;
-use Mithra62\LoginAlert\Model\MemberLoginAlerts AS Settings;
+use Mithra62\LoginAlert\Model\MemberLoginAlert AS Settings;
 use Mithra62\LoginAlert\Exceptions\Alerts\AlertException;
 use ExpressionEngine\Library\String\Str;
 use ExpressionEngine\Library\Data\Collection;
+use ExpressionEngine\Model\Member\Member AS MemberModel;
 
 class AlertService extends AbstractService
 {
@@ -37,7 +37,7 @@ class AlertService extends AbstractService
 
         if ($model->count() >= 1) {
             foreach ($model->all() AS $alert) {
-                $return[] = $this->buildObj($alert);
+                $return[] = $alert;
             }
         }
 
@@ -45,18 +45,24 @@ class AlertService extends AbstractService
     }
 
     /**
-     * @param Settings $alert
-     * @return AbstractAlert
+     * @param int $member_id
+     * @return array
      */
-    protected function buildObj(Settings $alert): AbstractAlert
+    public function getMemberRoles(int $member_id): array
     {
-        $class = 'Mithra62\LoginAlert\Alerts\Types\\' . Str::studly($alert->type);
-        if (!class_exists($class)) {
-            throw new AlertException("Alert Object doesn't exist! " . $class);
+        $return = [];
+        $member = ee('Model')
+            ->get('Member')
+            ->filter('member_id', $member_id)
+            ->first();
+
+        if($member instanceof MemberModel) {
+            $return[$member->PrimaryRole->role_id] = $member->PrimaryRole->role_id;
+            foreach($member->Roles AS $role) {
+                $return[$role->role_id] = $role->role_id;
+            }
         }
 
-        $obj = new $class;
-        $obj->setModel($alert);
-        return $obj;
+        return array_merge($return); //easy normalize
     }
 }

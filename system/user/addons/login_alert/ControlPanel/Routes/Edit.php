@@ -2,7 +2,7 @@
 namespace Mithra62\LoginAlert\ControlPanel\Routes;
 
 use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
-use Mithra62\LoginAlert\Model\MemberLoginAlerts as Settings;
+use Mithra62\LoginAlert\Model\MemberLoginAlert as Settings;
 use Mithra62\LoginAlert\Forms\Settings as SettingsForm;
 
 class Edit extends AbstractRoute

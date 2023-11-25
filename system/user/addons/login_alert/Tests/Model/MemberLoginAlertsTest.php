@@ -2,13 +2,13 @@
 namespace Mithra62\LoginAlert\Tests\Services;
 
 use PHPUnit\Framework\TestCase;
-use Mithra62\LoginAlert\Model\MemberLoginAlerts;
+use Mithra62\LoginAlert\Model\MemberLoginAlert;
 
 class MemberLoginAlertsTest extends TestCase
 {
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('Mithra62\LoginAlert\Model\MemberLoginAlerts'));
+        $this->assertTrue(class_exists('Mithra62\LoginAlert\Model\MemberLoginAlert'));
     }
 
     public function testPrimaryKeyPropertyExists()
@@ -21,10 +21,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testPrimaryKeyPropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testPrimaryKeyPropertyMatches(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testPrimaryKeyPropertyMatches(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertEquals('id', $model->getPrimaryKey());
         return $model;
@@ -32,10 +32,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testPrimaryKeyPropertyMatches
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testTableNamePropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testTableNamePropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('_table_name', $model);
         return $model;
@@ -43,10 +43,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testTableNamePropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testNamePropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testNamePropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('name', $model);
         return $model;
@@ -54,10 +54,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testNamePropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testTemplatePropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testTemplatePropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('notify_template', $model);
         return $model;
@@ -65,10 +65,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testTemplatePropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testStatusPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testStatusPropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('status', $model);
         return $model;
@@ -76,10 +76,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testStatusPropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testSubjectPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testSubjectPropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('notify_subject', $model);
         return $model;
@@ -87,10 +87,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testSubjectPropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testNotifyEmailsPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testNotifyEmailsPropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('notify_emails', $model);
         return $model;
@@ -98,10 +98,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testNotifyEmailsPropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testCreatedDatePropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testCreatedDatePropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('created_date', $model);
         return $model;
@@ -109,10 +109,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testCreatedDatePropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testLastUpdatedPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testLastUpdatedPropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('last_updated', $model);
         return $model;
@@ -120,10 +120,10 @@ class MemberLoginAlertsTest extends TestCase
 
     /**
      * @depends testLastUpdatedPropertyExists
-     * @param MemberLoginAlerts $model
-     * @return MemberLoginAlerts
+     * @param MemberLoginAlert $model
+     * @return MemberLoginAlert
      */
-    public function testSiteIdPropertyExists(MemberLoginAlerts $model): MemberLoginAlerts
+    public function testSiteIdPropertyExists(MemberLoginAlert $model): MemberLoginAlert
     {
         $this->assertObjectHasAttribute('site_id', $model);
         return $model;

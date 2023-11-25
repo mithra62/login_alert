@@ -18,7 +18,7 @@ return [
     'namespace'         => 'Mithra62\LoginAlert',
     'settings_exist'    => true,
     'models' => [
-        'Settings' => 'Model\MemberLoginAlerts',
+        'Settings' => 'Model\MemberLoginAlert',
     ],
     'services' => [
         'LoggerService' => function ($addon) {
