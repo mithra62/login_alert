@@ -84,14 +84,35 @@ class MemberLoginAlert extends Model
      */
     public function process(string $req, int $member_id): void
     {
-        echo __FILE__;
-        exit;
+        $deliveries = explode(',', $this->notify_emails);
+        foreach($deliveries AS $delivery) {
+            if (filter_var($delivery, FILTER_VALIDATE_EMAIL)) {
+                ee('login_alert:EmailService')
+                    ->setTo($delivery)
+                    ->setFromEmail(ee()->config->item('webmaster_email'))
+                    ->setFromName(ee()->config->item('site_name'))
+                    ->setReplyToEmail(ee()->config->item('webmaster_email'))
+                    ->setReplyToName(ee()->config->item('site_name'))
+                    ->setSubject($this->notify_subject)
+                    ->setTemplate($this->notify_template, $this->toArray())
+                    ->send();
+            }
+        }
     }
 
+    /**
+     * @param int $member_id
+     * @return bool
+     */
     protected function isMember(int $member_id): bool
     {
-        echo 'fdsa';
-        exit;
+        $log_into_what = explode(',',$this->log_into_what);
+        foreach($log_into_what AS $key => $value) {
+            if($member_id == (int)trim($value)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -101,7 +122,14 @@ class MemberLoginAlert extends Model
      */
     protected function isRole(int $member_id): bool
     {
+        $log_into_what = explode(',',$this->log_into_what);
         $roles = ee('login_alert:AlertService')->getMemberRoles($member_id);
-        return in_array($this->log_into_what, $roles);
+        foreach($log_into_what AS $key => $role) {
+            if(in_array((int)trim($role), $roles)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
