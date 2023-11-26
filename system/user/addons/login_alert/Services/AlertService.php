@@ -2,9 +2,6 @@
 
 namespace Mithra62\LoginAlert\Services;
 
-use Mithra62\LoginAlert\Model\MemberLoginAlert AS Settings;
-use Mithra62\LoginAlert\Exceptions\Alerts\AlertException;
-use ExpressionEngine\Library\String\Str;
 use ExpressionEngine\Library\Data\Collection;
 use ExpressionEngine\Model\Member\Member AS MemberModel;
 
