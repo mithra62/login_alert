@@ -11,7 +11,7 @@ class Delete extends AbstractRoute
 
     public function process($id = false)
     {
-        if (is_null($id)) {
+        if (!$id) {
             ee()->functions->redirect($this->url('index'));
         }
 
@@ -32,8 +32,7 @@ class Delete extends AbstractRoute
         $form = new DeleteAlert;
 
         if (!empty($_POST) && ee()->input->post('confirm') == 'y') {
-            //$alert->delete();
-
+            $alert->delete();
             ee('CP/Alert')->makeInline('shared-form')
                 ->asSuccess()
                 ->withTitle(lang('la.alert_deleted'))

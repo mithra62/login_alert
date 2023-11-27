@@ -16,6 +16,10 @@ class Edit extends AbstractRoute
 
     public function process($id = false)
     {
+        if (!$id) {
+            ee()->functions->redirect($this->url('index'));
+        }
+
         $vars['cp_page_title'] = lang('la.edit_alert_title');
         $vars['base_url'] = ee('CP/URL')->make($this->base_url . '/edit/' . $id);
 
