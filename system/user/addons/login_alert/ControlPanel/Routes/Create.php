@@ -2,7 +2,6 @@
 namespace Mithra62\LoginAlert\ControlPanel\Routes;
 
 use ExpressionEngine\Service\Addon\Controllers\Mcp\AbstractRoute;
-use Mithra62\LoginAlert\Model\MemberLoginAlert as Settings;
 use Mithra62\LoginAlert\Forms\Settings as SettingsForm;
 
 class Create extends AbstractRoute
@@ -13,6 +12,8 @@ class Create extends AbstractRoute
     {
         $vars['cp_page_title'] = lang('la.create_alert');
         $vars['base_url'] = $this->url('create');
+        $vars['save_btn_text'] = lang('la.create');
+        $vars['save_btn_text_working'] = lang('la.creating');
 
         $form = new SettingsForm();
         $alert = ee('Model')
@@ -23,9 +24,9 @@ class Create extends AbstractRoute
             $result = $alert->validate();
             if ($result->isValid()) {
                 $alert->save();
-                ee('CP/Alert')->makeInline('plans')
+                ee('CP/Alert')->makeInline('shared-form')
                     ->asSuccess()
-                    ->withTitle(lang('ct.sub.plan_created'))
+                    ->withTitle(lang('la.alert_created'))
                     ->defer();
 
                 ee()->functions->redirect($this->url('index'));
@@ -41,9 +42,9 @@ class Create extends AbstractRoute
 
         $vars += $form->generate();
 
-        $this->addBreadcrumb($this->url('edit'), 'la.alert.edit');
+        $this->addBreadcrumb($this->url('edit'), 'la.alert.create');
         $this->setBody('edit_alert', $vars);
-        $this->setHeading('re.header.edit_role_expire');
+        $this->setHeading('la.header.create_alert');
         return $this;
     }
 }

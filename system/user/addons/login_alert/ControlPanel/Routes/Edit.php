@@ -41,7 +41,7 @@ class Edit extends AbstractRoute
                 $alert->save();
                 ee('CP/Alert')->makeInline('shared-form')
                     ->asSuccess()
-                    ->withTitle(lang('ct.sub.plan_updated'))
+                    ->withTitle(lang('la.alert_updated'))
                     ->defer();
 
                 ee()->functions->redirect($this->url('index'));
@@ -60,7 +60,7 @@ class Edit extends AbstractRoute
 
         $vars += $form->generate();
 
-        $this->addBreadcrumb($this->url('edit'), 're.header.edit_role_expire');
+        $this->addBreadcrumb($this->url('edit'), 'la.header.edit_alert_title');
         $this->setBody('edit_alert', $vars);
         $this->setHeading('re.header.edit_role_expire');
         return $this;

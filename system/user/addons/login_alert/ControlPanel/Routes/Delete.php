@@ -12,7 +12,7 @@ class Delete extends AbstractRoute
     public function process($id = false)
     {
         if (is_null($id)) {
-            ee()->functions->redirect(ee('CP/URL')->make($this->base_url . '/vaults'));
+            ee()->functions->redirect($this->url('index'));
         }
 
         $alert = ee('Model')
@@ -21,10 +21,11 @@ class Delete extends AbstractRoute
             ->first();
 
         if (!$alert instanceof Settings) {
-            ee('CP/Alert')->makeBanner('shared-form')
+            ee('CP/Alert')->makeInline('shared-form')
                 ->asIssue()
                 ->withTitle(lang('la.alert_not_found'))
                 ->defer();
+
             ee()->functions->redirect($this->url('index'));
         }
 
@@ -33,7 +34,7 @@ class Delete extends AbstractRoute
         if (!empty($_POST) && ee()->input->post('confirm') == 'y') {
             //$alert->delete();
 
-            ee('CP/Alert')->makeBanner('shared-form')
+            ee('CP/Alert')->makeInline('shared-form')
                 ->asSuccess()
                 ->withTitle(lang('la.alert_deleted'))
                 ->defer();
@@ -44,8 +45,8 @@ class Delete extends AbstractRoute
         $vars = [
             'cp_page_title' => lang('la.header.delete_alert'),
             'base_url' => $this->url('delete/' . $alert->id),
-            'save_btn_text' => lang('la.delete'),
-            'save_btn_text_working' => lang('la.deleting'),
+            'save_btn_text' => lang('la.remove'),
+            'save_btn_text_working' => lang('la.removing'),
             'alert' => $alert,
         ];
 

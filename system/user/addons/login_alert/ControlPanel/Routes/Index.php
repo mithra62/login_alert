@@ -54,7 +54,7 @@ class Index extends AbstractRoute
             'la.id' => 'id',
             'la.name' => 'name',
             'la.type' => ['sort' => false],
-            'la.enabled' => ['encode' => false, 'sort' => false],
+            'la.status' => ['encode' => false, 'sort' => false],
             'la.manage' => [
                 'type' => Table::COL_TOOLBAR,
             ],
@@ -95,7 +95,7 @@ class Index extends AbstractRoute
                 ['toolbar_items' => [
                     'edit' => [
                         'href' => $url,
-                        'title' => lang('edit'),
+                        'title' => lang('la.edit_alert'),
                     ],
                     'remove' => [
                         'href' => $this->url( 'delete/' . $alert->getId()),
