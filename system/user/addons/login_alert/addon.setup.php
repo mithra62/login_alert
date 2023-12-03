@@ -22,7 +22,7 @@ return [
     ],
     'services' => [
         'LoggerService' => function ($addon) {
-            return new LoggerService(ee()->config->item('site_id'));
+            return new LoggerService();
         },
         'TemplateService' => function ($addon) {
             return new TemplateService(ee()->config->item('site_id'));

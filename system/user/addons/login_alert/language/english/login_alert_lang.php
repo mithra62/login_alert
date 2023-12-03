@@ -71,4 +71,7 @@ $lang = [
     'la.form.desc.notify_format' => 'Whether HTML or plain text',
     'la.form.notify_template' => 'Message Template',
     'la.form.desc.notify_template' => 'The EE template to use for the Email body content.',
+    'la.form.error.invalid_member_id' => 'Invalid Member ID (or multiple)',
+    'la.form.error.invalid_email' => 'Invalid Email Address (or multiple)',
+    'la.form.error.invalid_role_id' => 'Invalid Member Role ID (or multiple)',
 ];
