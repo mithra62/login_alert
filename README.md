@@ -1,6 +1,8 @@
 # Login Alert
 
-The Login Alert Add-on allows for configuring notifications whenever an ExpressionEngine Member logs into your site.  
+Get notified whenever a Member logs into your site. Configure multiple Login Alerts using multiple criteria, such as Control Panel vs Front End, which email te
+
+Super handy for security, to know when a Member account gets compromised, and/or for auditing Member activity, all in one tool. Create multiple Alerts, with varying criteria, using different email notifications and delivered to multiple recipients. 
 
 ### Running Tests
 
