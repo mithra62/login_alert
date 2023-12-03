@@ -8,7 +8,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="true"
-         stopOnError="true"
+         stopOnError="false"
          stopOnSkipped="true"
          printerClass="PHPUnit\TextUI\DefaultResultPrinter">
     <testsuites>

@@ -422,6 +422,7 @@ class EmailService extends AbstractService
             $this->validate();
             $message = $this->tpl->parseTemplate($this->getTemplate(), $this->getTemplateVars(), $this->getCustomVars());
             if(!$message) {
+                $this->logger()->debug('Email message is empty', $this->toArray());
                 return false;
             }
 

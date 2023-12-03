@@ -36,20 +36,20 @@ class Settings extends AbstractForm
             ])
             ->setValue($this->get('log_into'));
 
-        $field_set = $field_group->getFieldSet('la.form.log_into_when');
-        $field_set->setDesc('la.form.desc.log_into_when');
-        $field = $field_set->getField('log_into_when', 'select');
-        $field->setValue($this->get('log_into_when', 0))
-            ->setChoices([
-                'member' => lang('la.form.type.log_into_when.member'),
-                'role' => lang('la.form.type.log_into_when.role'),
-            ])
-            ->setValue($this->get('log_into_when'));
-
         $field_set = $field_group->getFieldSet('la.form.log_into_what');
         $field_set->setDesc('la.form.desc.log_into_what');
-        $field = $field_set->getField('log_into_what', 'text')
+        $field = $field_set->getField('log_into_what', 'select');
+        $field->setValue($this->get('log_into_what', 0))
+            ->setChoices([
+                'member' => lang('la.form.type.log_into_what.member'),
+                'role' => lang('la.form.type.log_into_what.role'),
+            ])
             ->setValue($this->get('log_into_what'));
+
+        $field_set = $field_group->getFieldSet('la.form.log_into_who');
+        $field_set->setDesc('la.form.desc.log_into_who');
+        $field = $field_set->getField('log_into_who', 'text')
+            ->setValue($this->get('log_into_who'));
 
         //notification fields
         $field_group = $form->getGroup('la.form.header.notification');

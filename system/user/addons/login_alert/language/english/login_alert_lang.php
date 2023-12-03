@@ -1,10 +1,10 @@
 <?php
 
 $lang = [
-    'login_alert_module_name'        => 'Login Alert',
+    'login_alert_module_name' => 'Login Alert',
     'login_alert_module_description' => 'Will send email upon login based on configuration',
-    'login_alert_settings'           => 'Login Alert Settings',
-    ''                            => '',
+    'login_alert_settings' => 'Login Alert Settings',
+    'la.alerts' => 'Alerts',
 
     //index
     'la.id' => 'ID',
@@ -38,7 +38,6 @@ $lang = [
     'la.create' => 'Create',
     'la.creating' => 'creating...',
 
-
     //delete alert form
     'la.form.header.remove_alert' => 'Remove Alert',
     'la.form.confirm_delete' => 'Confirm Removal',
@@ -52,15 +51,17 @@ $lang = [
     'la.form.status' => 'Status',
     'la.form.desc.status' => 'Toggle on/off',
     'la.form.log_into' => 'Which area of the site do you want to Alert on?',
+    'la.form.desc.log_into' => 'Either Front End, Control Panel, or Both',
     'la.form.type.cp' => 'Control Panel',
     'la.form.type.frontend' => 'Front End',
     'la.form.type.both' => 'Both',
     'la.form.log_into_when' => 'When?',
-    'la.form.desc.log_into_when' => 'Which option do you want to limit this to notify on?',
-    'la.form.type.log_into_when.member' => 'Member',
-    'la.form.type.log_into_when.role' => 'Role',
+    'la.form.desc.log_into_what' => 'Which option do you want to limit this to notify on?',
+    'la.form.type.log_into_what.member' => 'Member',
+    'la.form.type.log_into_what.role' => 'Role',
     'la.form.log_into_what' => 'What?',
-    'la.form.desc.log_into_what' => 'Which value(s) do you want to apply the Alert to? Depends on the "When?" value. Enter `member_id` or `role_id` seperated by commas for multiples',
+    'la.form.desc.log_into_who' => 'Which value(s) do you want to apply the Alert to? Depends on the "When?" value. Enter `member_id` or `role_id` seperated by commas for multiples',
+    'la.form.log_into_who' => 'Log into Who?',
     'la.form.header.notification' => 'Notification',
     'la.form.note.notify_emails' => 'The email addresses Notifications should be sent to. Separate multiples by commas.',
     'la.form.notify_emails' => 'Notify Emails',

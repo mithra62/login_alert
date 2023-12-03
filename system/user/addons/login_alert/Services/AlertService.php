@@ -4,6 +4,7 @@ namespace Mithra62\LoginAlert\Services;
 
 use ExpressionEngine\Library\Data\Collection;
 use ExpressionEngine\Model\Member\Member AS MemberModel;
+use ExpressionEngine\Model\Role\Role AS RoleModel;
 
 class AlertService extends AbstractService
 {
@@ -61,5 +62,55 @@ class AlertService extends AbstractService
         }
 
         return array_merge($return); //easy normalize
+    }
+
+    /**
+     * @param $role_ids
+     * @return bool
+     */
+    public function validateRoleIds($role_ids): bool
+    {
+        $check = explode(',', $role_ids);
+        $return = false;
+        if(is_array($check)) {
+            foreach($check AS $role_id) {
+                $role = ee('Model')
+                    ->get('Role')
+                    ->filter('role_id', $role_id)
+                    ->first();
+
+                if(!$role instanceof RoleModel) {
+                    $return = true;
+                    break;
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param $member_ids
+     * @return bool
+     */
+    public function validateMemberIds($member_ids): bool
+    {
+        $check = explode(',', $member_ids);
+        $return = false;
+        if(is_array($check)) {
+            foreach($check AS $role_id) {
+                $role = ee('Model')
+                    ->get('Member')
+                    ->filter('member_id', $role_id)
+                    ->first();
+
+                if(!$role instanceof MemberModel) {
+                    $return = true;
+                    break;
+                }
+            }
+        }
+
+        return $return;
     }
 }
